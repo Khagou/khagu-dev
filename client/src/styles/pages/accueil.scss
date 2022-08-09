@@ -62,13 +62,15 @@ div.skills {
         display: flex;
         justify-content: center;
         align-items: center;
-        ul {
-            li {
+        li {
+            margin-top: 50px;
+            input[type="radio"].typeTech {
+                display: none;
+            }
+            label {
                 list-style: none;
-                color: black;
                 padding: 10px;
-                margin-top: 50px;
-                border: solid 2px;
+                background-color: rgb(33, 33, 33);
             }
         }
     }

@@ -31,6 +31,7 @@ const Skills = () => {
               type="radio"
               id={typeTech}
               name="typeTech"
+              className="typeTech"
               onChange={(e) => setSelectedRadio(e.target.id)}
             />
             <label htmlFor={typeTech}>{typeTech}</label>
