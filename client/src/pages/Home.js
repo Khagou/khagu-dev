@@ -1,6 +1,7 @@
 import React from "react";
 import Apropos from "../components/home/Apropos";
 import Presentation from "../components/home/Presentation";
+import Skills from "../components/home/Skills";
 import Logo from "../components/Logo";
 import Navigation from "../components/Navigation";
 
@@ -15,6 +16,7 @@ const Home = () => {
         <Presentation />
       </div>
       <Apropos />
+      <Skills />
     </div>
   );
 };

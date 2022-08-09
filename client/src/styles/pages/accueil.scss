@@ -46,3 +46,40 @@ div.AproposArea {
         }
     }
 }
+div.skills {
+    div.title {
+        background-color: rgb(33, 33, 33);
+        padding: 15px 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        h5 {
+            font-size: 42px;
+            margin: auto;
+        }
+    }
+    div.filtres {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        ul {
+            li {
+                list-style: none;
+                color: black;
+                padding: 10px;
+                margin-top: 50px;
+                border: solid 2px;
+            }
+        }
+    }
+    div.list {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        margin: 50px 150px;
+        div.card {
+            margin: 15px;
+        }
+    }
+}
