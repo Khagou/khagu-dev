@@ -1,10 +1,18 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Card from "./Card";
-import Filtres from "./Filtres";
 
 const Skills = () => {
   const [data, setData] = useState([]);
+  const [selectedRadio, setSelectedRadio] = useState("");
+  const radios = [
+    "database",
+    "back-end",
+    "front-end",
+    "versionning",
+    "OS",
+    "virtualisation",
+  ];
 
   // Le useEffect ce joue lorsque le composant est monté
   useEffect(() => {
@@ -17,14 +25,24 @@ const Skills = () => {
         <h5>Skills</h5>
       </div>
       <div className="filtres">
-        {data.map((tech, index) => (
-          <Filtres key={index} tech={tech} />
+        {radios.map((typeTech) => (
+          <li>
+            <input
+              type="radio"
+              id={typeTech}
+              name="typeTech"
+              onChange={(e) => setSelectedRadio(e.target.id)}
+            />
+            <label htmlFor={typeTech}>{typeTech}</label>
+          </li>
         ))}
       </div>
       <div className="list">
-        {data.map((tech, index) => (
-          <Card key={index} tech={tech} />
-        ))}
+        {data
+          .filter((tech) => tech.techType.includes(selectedRadio))
+          .map((tech, index) => (
+            <Card key={index} tech={tech} />
+          ))}
       </div>
     </div>
   );
