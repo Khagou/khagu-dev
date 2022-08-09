@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const TechModel = mongoose.model(
-  "khaguworld",
+  "khagu-dev",
   {
     techName: {
       type: String,

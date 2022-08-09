@@ -1,0 +1,23 @@
+div.top {
+    background-image: url("../assets/images/redimensionne-modified(1).svg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    width: 100vw;
+    height: 100vh;
+
+    div.nav {
+        display: flex;
+        justify-content: space-between;
+        padding: 20px;
+        div.navigation {
+            ul {
+                display: flex;
+                a {
+                    margin: 10px;
+                    font-weight: bold;
+                }
+            }
+        }
+    }
+}

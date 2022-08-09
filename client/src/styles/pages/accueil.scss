@@ -1,0 +1,48 @@
+div.top {
+    div.presentation {
+        margin-top: 15%;
+        h2 {
+            text-align: center;
+            font-size: 45px;
+        }
+        h3 {
+            text-align: center;
+            font-size: 32px;
+        }
+        ul {
+            a {
+                display: flex;
+                justify-content: center;
+                li {
+                    text-align: center;
+                    margin-top: 15px;
+                    font-size: 22px;
+                    padding: 5px;
+                    border: 2px solid;
+                    border-color: $white;
+                    border-radius: 20px;
+                }
+            }
+        }
+    }
+}
+div.AproposArea {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    img {
+        width: 35vw;
+        margin: 0 25px;
+    }
+    div.Apropos {
+        margin: 45px;
+        color: black;
+        h4 {
+            font-size: 32px;
+            margin-bottom: 35px;
+        }
+        p {
+            margin-top: 15px;
+        }
+    }
+}

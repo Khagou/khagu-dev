@@ -14,7 +14,7 @@ router.post("/", (req, res) => {
   const newRecord = new TechModel({
     techName: req.body.techName,
     image: req.body.image,
-    techType: req.body.image,
+    techType: req.body.techType,
   });
   newRecord.save((err, docs) => {
     if (!err) res.send(docs);
