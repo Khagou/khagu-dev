@@ -62,8 +62,10 @@ div.skills {
         display: flex;
         justify-content: center;
         align-items: center;
+        margin: 50px;
         li {
             margin-top: 50px;
+            margin: 10px;
             input[type="radio"].typeTech {
                 display: none;
             }
