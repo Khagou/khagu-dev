@@ -16,7 +16,7 @@ const Skills = () => {
 
   // Le useEffect ce joue lorsque le composant est monté
   useEffect(() => {
-    axios.get("http://localhost:5500/").then((res) => setData(res.data));
+    axios.get(process.env.REACT_APP_BASE_URL).then((res) => setData(res.data));
   }, []);
 
   return (
@@ -25,8 +25,8 @@ const Skills = () => {
         <h5>Skills</h5>
       </div>
       <div className="filtres">
-        {radios.map((typeTech) => (
-          <li>
+        {radios.map((typeTech, index) => (
+          <li key={index}>
             <input
               type="radio"
               id={typeTech}

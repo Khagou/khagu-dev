@@ -1,0 +1,39 @@
+version: "3"
+services:
+  react-app:
+    image: react-app
+    build: ./client/
+    stdin_open: true
+    ports:
+      - "3000:3000"
+    networks:
+    - khagu-dev
+    volumes:
+      - ./client/:/user/src/app
+      - /usr/src/app/node_modules
+  api-server:
+    image: api-server
+    build: ./server/
+    ports:
+      - "5500:5500"
+    networks:
+      - khagu-dev
+    volumes:
+      - ./server/:/user/src/app
+      - /usr/src/app/node_modules
+    depends_on:
+      - mongo
+  mongo:
+    image: mongo:4.4-bionic
+    ports:
+      - "27017:27017"
+    networks:
+      - khagu-dev
+    volumes:
+      - mongo-data:/data/db
+networks:
+  khagu-dev:
+    driver: bridge
+volumes:
+  mongo-data:
+    driver: local
