@@ -1,7 +1,9 @@
 div.topAccueil {
     background-image: url("../assets/images/redimensionne-modified(1).svg");
+    box-shadow: 5px -1px 30px -5px grey;
     background-position: center;
     background-repeat: no-repeat;
+    background-size: cover;
     height: 100vh;
     div.fixed {
         div.nav {
@@ -74,6 +76,7 @@ div.topAccueil {
                     overflow: hidden;
                     transition: height 400ms ease-in-out;
                     background-color: rgba(240, 248, 255, 0.404);
+                    z-index: 1000;
                     a {
                         color: inherit;
                         text-decoration: none;
