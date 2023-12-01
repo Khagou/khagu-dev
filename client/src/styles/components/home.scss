@@ -67,6 +67,7 @@ div.topAccueil {
                     }
                 }
                 ul {
+                    z-index: 1000;
                     list-style-type: none;
                     position: absolute;
                     width: 45vw;
