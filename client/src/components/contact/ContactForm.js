@@ -11,7 +11,7 @@ const ContactForm = () => {
   const handleSend = async () => {
     setSent(true);
     try {
-      await axios.post("/send_mail", {
+      await axios.post("http://localhost:7000/send_mail", {
         nom,
         prenom,
         text,

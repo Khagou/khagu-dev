@@ -1,19 +1,20 @@
 import React from "react";
-import Footer from "../components/Footer";
-
-import Navigation from "../components/Navigation";
+import Navigation from "../components/Navigation/Navigation";
 import PortfolioContent from "../components/Portfolio/PortfolioContent";
 
 const Portfolio = () => {
   return (
-    <div>
-      <div className="topPortfolio">
-        <div className="nav">
-          <Navigation />
+    <div className="page-wrapper portfolio-page">
+      <Navigation />
+      <main>
+        <div className="page-hero">
+          <h1>Mon Portfolio</h1>
+          <p>Découvrez mes projets et réalisations</p>
         </div>
-      </div>
-      <PortfolioContent />
-      <Footer />
+        <div className="content-container">
+          <PortfolioContent />
+        </div>
+      </main>
     </div>
   );
 };

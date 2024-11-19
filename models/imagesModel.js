@@ -1,19 +1,50 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
-const ImageModel = new Schema({
-  name: {
+const ProjectModel = new Schema({
+  title: {
     type: String,
     required: true,
   },
-  caption: {
+  description: {
     type: String,
     required: true,
   },
-  chemin: {
+  technologies: [
+    {
+      type: String,
+    },
+  ],
+  type: {
     type: String,
-    required: true,
+    enum: ["client", "professional", "personal"],
+    default: "client",
   },
+  details: [
+    {
+      type: String,
+    },
+  ],
+  links: {
+    demo: String,
+    github: String,
+  },
+  images: [
+    {
+      name: {
+        type: String,
+        required: true,
+      },
+      caption: {
+        type: String,
+        required: true,
+      },
+      chemin: {
+        type: String,
+        required: true,
+      },
+    },
+  ],
 });
 
-module.exports = mongoose.model("images", ImageModel);
+module.exports = mongoose.model("images", ProjectModel);

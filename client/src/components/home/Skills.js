@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect, isChecked } from "react";
 import axios from "axios";
 import Card from "./Card";
 import "../../styles/index.scss";
 
-// Trie des techs en fonction du filtre
-// Ajout active sur filtre sélectionné
 const Skills = () => {
   const [data, setData] = useState([]);
   const [selectedRadio, setSelectedRadio] = useState("");
+  const [isChecked, setIsChecked] = useState(false);
+
   const radios = [
     "database",
     "back-end",
@@ -20,10 +20,21 @@ const Skills = () => {
     "cloud",
   ];
 
-  // Le useEffect ce joue lorsque le composant est monté
   useEffect(() => {
-    axios.get("/api/tech").then((res) => setData(res.data));
+    axios
+      .get("http://localhost:7000/api/tech")
+      .then((res) => setData(res.data));
   }, []);
+
+  const handleRadioClick = (typeTech) => {
+    if (selectedRadio === typeTech) {
+      setSelectedRadio("");
+      setIsChecked(false);
+    } else {
+      setSelectedRadio(typeTech);
+      setIsChecked(true);
+    }
+  };
 
   return (
     <div className="skills">
@@ -38,9 +49,10 @@ const Skills = () => {
               id={typeTech}
               name="typeTech"
               className="typeTech"
-              onChange={(e) => setSelectedRadio(e.target.id)}
+              checked={selectedRadio === typeTech && isChecked ? "checked" : ""}
+              onChange={() => handleRadioClick(typeTech)}
+              value={typeTech}
             />
-
             <label
               htmlFor={typeTech}
               className={selectedRadio === typeTech ? "checked" : ""}
@@ -52,7 +64,10 @@ const Skills = () => {
       </div>
       <div className="list">
         {data
-          .filter((tech) => tech.techType.includes(selectedRadio))
+          .filter(
+            (tech) =>
+              selectedRadio === "" || tech.techType.includes(selectedRadio)
+          )
           .map((tech, index) => (
             <Card key={index} tech={tech} />
           ))}

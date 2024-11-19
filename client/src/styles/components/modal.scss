@@ -1,79 +1,139 @@
+@use "../settings";
+
 div#portal {
-    div.overlay {
+    .overlay {
         position: fixed;
         top: 0;
         left: 0;
         right: 0;
         bottom: 0;
-        background-color: rgba(0, 0, 0, 0.3);
+        background-color: rgba(0, 0, 0, 0.7);
         z-index: 1000;
     }
-    div.modal {
+    .modal {
         position: fixed;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
         background-color: #fff;
-        padding: 25px;
+        padding: 2rem;
         z-index: 1000;
-        button {
+        max-width: 90vw;
+        max-height: 90vh;
+        overflow-y: auto;
+        border-radius: 8px;
+        .close-button {
             position: absolute;
             width: 30px;
             height: 30px;
-            font-size: 36px;
-            right: 35px;
-            top: 5px;
+            right: 1rem;
+            top: 1rem;
             cursor: pointer;
+            background: none;
+            border: none;
             p {
                 position: absolute;
                 top: -10px;
                 right: -2px;
                 padding: 0;
                 margin: 0;
+                color: settings.$dark-grey;
             }
         }
-        img.modalImg {
-            width: 95vw;
-            margin: 15px;
-            border: 1px solid black;
+        .modal-content {
+            color: settings.$dark-grey;
+            h2 {
+                color: settings.$color-1;
+                margin-bottom: 1.5rem;
+                font-size: 1.8rem;
+            }
+            h3 {
+                color: settings.$color-1;
+                margin: 1.5rem 0 1rem;
+            }
+            .project-description {
+                color: settings.$dark-grey;
+                line-height: 1.6;
+                margin-bottom: 1.5rem;
+            }
+            .project-technologies {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 0.5rem;
+                margin-bottom: 1.5rem;
+                .tech-badge {
+                    background: settings.$color-1;
+                    color: settings.$white;
+                    padding: 0.25rem 0.75rem;
+                    border-radius: 15px;
+                    font-size: 0.875rem;
+                }
+            }
+            .image-gallery {
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+                margin: 1.5rem 0;
+                img.modalImg {
+                    width: 100%;
+                    height: auto;
+                    max-height: 500px;
+                    object-fit: contain;
+                    margin: 0;
+                    border: 1px solid settings.$dark-grey;
+                    border-radius: 4px;
+                }
+            }
+            .project-details {
+                ul {
+                    list-style: none;
+                    padding: 0;
+                    margin: 0;
+                    li {
+                        color: settings.$dark-grey;
+                        margin-bottom: 0.5rem;
+                        padding-left: 1rem;
+                        position: relative;
+                        &:before {
+                            content: "•";
+                            position: absolute;
+                            left: 0;
+                            color: settings.$color-1;
+                        }
+                    }
+                }
+            }
+            .project-links {
+                display: flex;
+                gap: 1rem;
+                margin-top: 1.5rem;
+                a {
+                    padding: 0.5rem 1rem;
+                    background: settings.$color-1;
+                    color: settings.$white;
+                    text-decoration: none;
+                    border-radius: 4px;
+                    transition: background 0.3s ease;
+                    &:hover {
+                        background: darken(settings.$color-1, 10%);
+                    }
+                }
+            }
         }
     }
 }
 @media screen and (min-width: 920px) {
     div#portal {
-        div.overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: rgba(0, 0, 0, 0.3);
-            z-index: 1000;
-        }
-        div.modal {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: #fff;
-            padding: 25px;
-            z-index: 1000;
-            button {
-                width: 30px;
-                height: 30px;
-                font-size: 36px;
-                p {
-                    position: absolute;
-                    top: -10px;
-                    left: 0px;
-                    padding: 0;
-                    margin: 0;
+        .modal {
+            width: 80vw;
+            max-width: 1200px;
+            .modal-content {
+                .image-gallery {
+                    grid-template-columns: repeat(2, 1fr);
+                    img.modalImg {
+                        max-height: 400px;
+                    }
                 }
-            }
-            img.modalImg {
-                width: 1080px;
-                margin: 15px;
-                border: 1px solid black;
             }
         }
     }

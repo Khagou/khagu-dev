@@ -1,0 +1,58 @@
+@use "../settings";
+
+// Style commun pour toutes les pages
+.page-wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  main {
+    flex: 1;
+    // background: settings.$color-1;
+    border: none;
+  }
+}
+
+// Styles spécifiques pour chaque page
+.portfolio-page {
+  .portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    padding: 2rem 0;
+  }
+}
+
+.contact-page {
+  .contact-form-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 2rem 0;
+  }
+}
+
+.home-page {
+  .hero-content {
+    text-align: center;
+    padding: 4rem 2rem;
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 1.5rem;
+    }
+
+    p {
+      font-size: 1.2rem;
+      max-width: 800px;
+      margin: 0 auto 2rem;
+    }
+  }
+
+  .features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    padding: 4rem 2rem;
+    background: settings.$color-grey;
+  }
+}

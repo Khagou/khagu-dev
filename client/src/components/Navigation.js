@@ -1,83 +1,39 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 
 const Navigation = () => {
-  const [scrolled, setscrolled] = useState(false);
-  const navRef = useRef();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const onButtonClick = () => {
-    // using Java Script method to get PDF file
-    fetch("./images/CV.pdf").then((response) => {
-      response.blob().then((blob) => {
-        // Creating new object of PDF file
-        const fileURL = window.URL.createObjectURL(blob);
-        // Setting various property values
-        let alink = document.createElement("a");
-        alink.href = fileURL;
-        alink.target = "_blank";
-        alink.click();
-      });
-    });
-  };
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (
-        document.body.scrollTop >= 100 ||
-        document.documentElement.scrollTop >= 100
-      ) {
-        navRef.current.classList.add("nav-active");
-
-        if (!scrolled) {
-          navRef.current.style.transform = "translateY(-70px)";
-        }
-
-        setTimeout(function () {
-          navRef.current.style.transform = "translateY(0px)";
-          setscrolled(true);
-        }, 110);
-      } else {
-        navRef.current.classList.remove("nav-active");
-        setscrolled(false);
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, [scrolled, setscrolled]);
   return (
-    <div className="fixed" ref={navRef}>
-      <div className="nav">
+    <header className="page-header">
+      <div className="nav-container">
         <div className="logo">
-          <NavLink to="/">
-            <h1>khagu-dev</h1>
-          </NavLink>
+          <h1>Khagu-dev</h1>
         </div>
+
         <nav>
-          <input type="checkbox" id="checkbox_hamburger" />
-          <label className="hamburger" htmlFor="checkbox_hamburger">
-            <p className="code_hamburger">&#9776;</p>
-            <p className="code_cross">&#10539;</p>
-          </label>
-          <ul>
-            <NavLink to="/">
-              <li>Accueil</li>
+          <button
+            className="menu-toggle"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          >
+            {isMenuOpen ? "✕" : "☰"}
+          </button>
+
+          <div className={`nav-menu ${isMenuOpen ? "active" : ""}`}>
+            <NavLink to="/" onClick={() => setIsMenuOpen(false)}>
+              Accueil
             </NavLink>
-            <NavLink to="/portfolio">
-              <li>Portfolio</li>
+            <NavLink to="/portfolio" onClick={() => setIsMenuOpen(false)}>
+              Portfolio
             </NavLink>
-            <NavLink to="/contact">
-              <li>Contact</li>
+            <NavLink to="/contact" onClick={() => setIsMenuOpen(false)}>
+              Contact
             </NavLink>
-            <li className="cv" onClick={onButtonClick}>
-              <p>CV</p>
-            </li>
-          </ul>
+            <button className="cv-button">CV</button>
+          </div>
         </nav>
       </div>
-    </div>
+    </header>
   );
 };
 

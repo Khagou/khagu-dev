@@ -1,19 +1,24 @@
-import Footer from "../components/Footer";
-import Apropos from "../components/home/Apropos";
+import React from "react";
+import Navigation from "../components/Navigation/Navigation";
 import Presentation from "../components/home/Presentation";
+import Apropos from "../components/home/Apropos";
 import Skills from "../components/home/Skills";
-import Navigation from "../components/Navigation";
+import Footer from "../components/Footer";
 
 const Home = () => {
   return (
-    <div>
-      <div className="topAccueil">
-        <Navigation />
+    <div className="page-wrapper home-page">
+      <Navigation />
 
-        <Presentation />
-      </div>
-      <Apropos />
-      <Skills />
+      <main>
+        <div className="topAccueil">
+          <Presentation />
+        </div>
+
+        <Apropos />
+        <Skills />
+      </main>
+
       <Footer />
     </div>
   );

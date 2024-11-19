@@ -3,41 +3,100 @@ import React, { useEffect, useState } from "react";
 import Modal from "./Modal";
 
 const PortfolioContent = () => {
-  const [data, setData] = useState([]);
+  const [projects, setProjects] = useState([]);
+  const [activeFilter, setActiveFilter] = useState("all");
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedProject, setSelectedProject] = useState(null);
 
   useEffect(() => {
-    axios.get("/api/images").then((res) => setData(res.data));
+    axios
+      .get("http://localhost:7000/api/images/projects")
+      .then((res) => {
+        setProjects(res.data);
+      })
+      .catch((error) => {
+        console.error("Erreur lors de la récupération des projets:", error);
+      });
   }, []);
-
-  const [isOpen, setIsOpen] = useState(false);
-  const [tempdata, setTempData] = useState([]);
-
-  const tempData = (image) => {
-    setTempData(image);
-    setIsOpen(true);
-  };
 
   return (
     <div className="portfolio">
-      <h2>Site vitrine réalisé pour une entreprise de pose d'adhésif</h2>
-      <div className="adpose">
-        {data.map((images, index) => (
-          <li key={index} className="image">
-            <img
-              src={images.chemin}
-              alt={images.name}
-              onClick={() => tempData(images)}
-              // onChange={() => setPicture(images)}
-            />
-
-            <Modal
-              open={isOpen}
-              onClose={() => setIsOpen(false)}
-              image={tempdata}
-            ></Modal>
-          </li>
-        ))}
+      <div className="portfolio-filters">
+        <button
+          className={activeFilter === "all" ? "active" : ""}
+          onClick={() => setActiveFilter("all")}
+        >
+          Tous
+        </button>
+        <button
+          className={activeFilter === "client" ? "active" : ""}
+          onClick={() => setActiveFilter("client")}
+        >
+          Projets Clients
+        </button>
+        <button
+          className={activeFilter === "professional" ? "active" : ""}
+          onClick={() => setActiveFilter("professional")}
+        >
+          Expérience Pro
+        </button>
       </div>
+
+      <div className="projects-grid">
+        {projects
+          .filter(
+            (project) => activeFilter === "all" || project.type === activeFilter
+          )
+          .map((project) => (
+            <div key={project._id} className="project-card">
+              <h3>{project.title || project._id}</h3>
+              <p className="project-description">{project.description}</p>
+
+              <div className="technologies">
+                {project.technologies?.map((tech, index) => (
+                  <span key={index} className="tech-tag">
+                    {tech}
+                  </span>
+                ))}
+              </div>
+
+              {project.images && project.images.length > 0 && (
+                <div className="project-images">
+                  <img
+                    src={project.images[0].chemin}
+                    alt={project.images[0].name}
+                    onClick={() => {
+                      setSelectedProject(project);
+                      setIsOpen(true);
+                    }}
+                  />
+                  {project.images.length > 1 && (
+                    <span className="more-images">
+                      +{project.images.length - 1}
+                    </span>
+                  )}
+                </div>
+              )}
+
+              {project.details && project.details.length > 0 && (
+                <div className="project-details">
+                  <ul>
+                    {project.details.slice(0, 2).map((detail, index) => (
+                      <li key={index}>{detail}</li>
+                    ))}
+                    {project.details.length > 2 && <li>...</li>}
+                  </ul>
+                </div>
+              )}
+            </div>
+          ))}
+      </div>
+
+      <Modal
+        open={isOpen}
+        onClose={() => setIsOpen(false)}
+        project={selectedProject}
+      />
     </div>
   );
 };
